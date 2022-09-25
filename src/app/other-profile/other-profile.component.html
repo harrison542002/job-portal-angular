@@ -1,0 +1,58 @@
+<app-profile-nav></app-profile-nav>
+<div class="container-fluid mt-5 profile pb-5" *ngIf="firstName">
+    <div class="row mt-5">
+        <div class="col-md-5 mt-5">
+            <div class="rounded border shadow-sm bg-light">
+                <div class="container mt-3 mb-3">
+                    <div class="container row">
+                        <img class="img-fluid" [src]="imgURL" alt="image" *ngIf="imgURL">
+                        <div class="pt-4 ms-lg-3">
+                            <h4 class="text-center">{{firstName}} {{lastName}} ({{nickName}})</h4>
+                            <h5 class="text-center text-secondary">
+                                <i class="fa-solid fa-map-pin text-danger"></i> {{country}}, {{city}}
+                            </h5>
+                            <h5 class="text-center">
+                                {{occupation}} | {{industry}}
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-7 mt-5">
+            <div class="container rounded shadow-sm h-100 bg-light">
+                <div class="container p-2">
+                    <div class="container mt-3 mb-5">
+                        <h5>
+                            <i class="fa-solid fa-graduation-cap"></i> &nbsp;
+                            <b>Education Background</b>
+                        </h5>
+                        <p>
+                            {{school}} - {{qulification}}
+                        </p>
+                    </div>
+                    <div class="container mb-5">
+                        <h5>
+                            <i class="fa-solid fa-user-pen"></i> &nbsp;
+                            <b>Self Description</b>
+                        </h5>
+                        <p>
+                            {{selfSummary}}
+                        </p>
+                    </div>
+                    <div class="container mb-5">
+                        <h5>
+                            <i class="fa-solid fa-laptop-code"></i>&nbsp;
+                            <b>Skills</b>
+                        </h5>
+                        <div *ngFor="let skill of skills; let i = index">
+                            <p>
+                                {{i+1}}. {{skill}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

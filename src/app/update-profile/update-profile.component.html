@@ -1,0 +1,169 @@
+<app-formnav></app-formnav>
+<div class="container mt-5 mb-5">
+  <h2 class="text-center pt-5 title">
+    One Way To Go 🙉
+  </h2>
+  <p class="text-center">
+    Rich profile information can let <b>employers</b> to easily notice you.
+  </p>
+  <form class="pt-5" *ngIf="form" (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="container">
+
+      <!-- Name -->
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingInput" placeholder="Your First Name" name="firstName"
+              formControlName="firstName" />
+            <label for="floatingInput">
+              First Name
+            </label>
+          </div>
+          <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+            <div *ngIf="firstName.errors?.['required']" class="alert alert-danger">
+              Name is required
+            </div>
+            <div *ngIf="firstName.errors?.['minlength']" class="alert alert-danger">
+              Name requires at least 4 character
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="floatingPassword" placeholder="Your Last Name" name="lastName"
+              formControlName="lastName">
+            <label for="floatingPassword">
+              Last Name
+            </label>
+          </div>
+          <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+            <div *ngIf="lastName.errors?.['required']" class="alert alert-danger">
+              Name is required
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Name -->
+
+      <!-- Profile -->
+      <div class="mb-3">
+        <label for="formFile" class="form-label normal mb-3"><b>Choose Your Profile Picture</b></label>
+        <input class="form-control uploader mb-3" accept="image/*" type="file" id="formFile" (change)="showPreview($event)">
+      </div>
+      <div *ngIf="error" class="normal alert alert-danger mb-3">
+          Please Enter Profile Image size less than <b>80 KB</b> 
+      </div>
+      <!-- Profile -->
+
+      <!-- nickName -->
+      <div class="form-floating normal mb-3">
+        <input type="text" class="form-control" id="floatingInput" placeholder="nickName" name="nickName"
+          formControlName="nickName">
+        <label for="floatingInput">Nick Name</label>
+      </div>
+      <div class="normal mb-3" *ngIf="nickName.invalid && (nickName.dirty || nickName.touched)">
+        <div *ngIf="nickName.errors?.['required']" class="alert alert-danger">
+          Please enter one nickname for your employer to call out
+        </div>
+      </div>
+      <!-- nickName -->
+
+      <!-- Education -->
+      <div class="form-floating mb-3 normal">
+        <input type="text" class="form-control" id="floatingInput" placeholder="School Name" name="school"
+          formControlName="school" />
+        <label for="floatingInput">
+          Name of School
+        </label>
+      </div>
+      <div *ngIf="school.invalid && (school.dirty || school.touched)" class="normal">
+        <div *ngIf="school.errors?.['required']" class="alert alert-danger">
+          Education Background is required
+        </div>
+      </div>
+      <!-- Education -->
+
+      <!-- Qulification -->
+      <label for="qulification" class="normal mb-3"><b>Choose Your Education qulification Type : </b></label>
+      <select class="form-select normal mb-3" name="qulification" id="qulification" formControlName="qulification">
+        <option *ngFor="let degree of qulificationLists" [value]="degree">{{degree}}</option>
+      </select>
+      <!-- Qulification -->
+
+      <!-- Skills -->
+      <label for="qulification" class="normal"><b>Choose Your Skills: </b></label>
+      <div class="form-check normal" *ngFor="let skill of skillsLists">
+        <input class="form-check-input" type="checkbox" value="{{skill}}" id="{{skill}}" (change)="onChange(skill,$event.target)">
+        <label class="form-check-label" for="{{skill}}">
+          {{skill}}
+        </label>
+      </div>
+      <!-- Skills -->
+
+      <!-- Industry Type -->
+      <label for="industry" class="normal mb-3 mt-3"><b>Choose Your Industry Type :</b></label>
+      <select class="form-select normal mb-3" name="industry" id="industry" formControlName="industry">
+        <option *ngFor="let industryType of industryLists" [value]="industryType">{{industryType}}</option>
+      </select>
+
+      <div class="normal mb-3" *ngIf="industry.invalid && (industry.dirty || industry.touched)">
+        <div *ngIf="industry.errors?.['required']" class="alert alert-danger">
+          Please choose one industry type
+        </div>
+      </div>
+      <!-- Industry Type -->
+
+      <!-- Occupation -->
+      <label for="occupation" class="normal mb-3"><b>I am Currently A :</b></label>
+      <select class="form-select normal mb-3" name="occupation" id="occupation" formControlName="occupation">
+        <option *ngFor="let occupationType of occupationLists" [value]="occupationType">{{occupationType}}</option>
+      </select>
+
+      <div class="normal mb-3" *ngIf="occupation.invalid && (occupation.dirty || occupation.touched)">
+        <div *ngIf="occupation.errors?.['required']" class="alert alert-danger">
+          Please choose type of occupation
+        </div>
+      </div>
+      <!-- Occupation -->
+
+      <!-- Country -->
+      <label for="country" class="normal mb-3"><b>Country : </b></label>
+      <select class="form-select normal mb-3" name="country" id="country" formControlName="country">
+        <option *ngFor="let eachCountry of countryLists" [value]="eachCountry">{{eachCountry}}</option>
+      </select>
+
+      <div class="normal mb-3" *ngIf="country.invalid && (country.dirty || country.touched)">
+        <div *ngIf="country.errors?.['required']" class="alert alert-danger">
+          Please choose your country
+        </div>
+      </div>
+      <!-- Country -->
+
+      <!-- City -->
+      <div class="form-floating mb-3 normal">
+        <input type="text" class="form-control" id="city" placeholder="City" name="city"
+          formControlName="city" />
+        <label for="floatingInput">
+          City
+        </label>
+      </div>
+      <div *ngIf="city.invalid && (city.dirty || city.touched)" class="normal">
+        <div *ngIf="city.errors?.['required']" class="alert alert-danger">
+          Please Enter Your City
+        </div>
+      </div>
+      <!-- City -->
+
+      <!-- Summary -->
+      <label for="selfSummary" class="normal mb-3"><b>Self Description</b></label>
+      <textarea class="form-control normal mb-3" id="selfSummary" rows="4" formControlName="selfSummary"></textarea>
+      <!-- Summary -->
+
+      <div class="d-grid btn-div">
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid || error">
+          Continue
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

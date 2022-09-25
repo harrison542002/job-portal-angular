@@ -1,0 +1,52 @@
+@use '../../styles.scss' as m;
+
+.firsthead {
+    font-size: 5em;
+    font-family: m.$title-font;
+}
+
+.first {
+    color: m.$common-color;
+}
+
+.para {
+    width: 75%;
+}
+
+.trusted{
+    background-color: m.$common-color;
+    
+}
+
+.trusttitle{
+    font-family: m.$title-font;
+    text-align: center;
+    color: white;
+    font-size: 2em;
+    margin: 2% 0;
+}
+
+.partner-card{
+
+    background-color: m.$second-color;
+    border: none;
+    margin-bottom: 2%;
+
+}
+
+.quote{
+    font-size: 1.6em;
+}
+
+.brand{
+    font-family: m.$title-font;
+    padding: 5%;
+}
+
+@media screen and (max-width : 760px) {
+
+    .para {
+        width: 100%;
+    }
+
+}

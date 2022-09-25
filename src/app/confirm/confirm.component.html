@@ -1,0 +1,39 @@
+<app-formnav></app-formnav>
+<div class="container mt-5 pb-5 pt-5 mb-5">
+  <div class="normal alert alert-success" role="alert">
+    Please Enter Your Verification Code 
+    <h5>
+      <i class="fa-solid fa-circle-check text-center"></i>
+      {{verifiedCode}}
+    </h5>
+  </div>
+  <h2 class="text-center pt-5 title">
+    Verify Your Email Address
+  </h2>
+  <p class="text-center">
+    Please enter the verification code that we had just sent into your email, <br>
+    if your email is real then verification code will be in above with green background
+  </p>
+  <form class="pt-5" *ngIf="form" (ngSubmit)="onSubmit()" [formGroup]="form">
+    <div class="container">
+      <div class="form-floating normal mb-3">
+        <input type="text" class="form-control" id="floatingInput" name="code" placeholder="verification code"
+          formControlName="code">
+        <label for="floatingInput">Verification Code</label>
+      </div>
+      <div class="normal" *ngIf="code.invalid && code.dirty">
+        <div *ngIf="code.errors?.['required']" class="alert alert-danger">
+          Please Enter Verification Code
+        </div>
+        <div *ngIf="code.errors?.['codeMisMatch']" class="alert alert-danger">
+          Code does not match, Please retry again.
+        </div>
+      </div>  
+      <div class="d-grid btn-div">
+        <button type="submit" class="btn btn-primary btn-lg" [disabled]="form.invalid">
+          Confirm
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

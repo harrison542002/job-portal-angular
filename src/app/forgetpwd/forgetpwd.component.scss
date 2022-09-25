@@ -1,0 +1,25 @@
+@use '../../styles.scss' as m;
+
+.title{
+    font-family: m.$title-font;
+}
+
+.normal{
+    margin: 0 m.$normal;
+}
+
+.btn-div{
+    margin: 0 m.$button;
+}
+
+@media screen and (max-width : 760px) {
+
+    .normal { 
+        margin: 0;
+    }
+
+    .btn-div{
+        margin: 0;
+    }   
+
+}

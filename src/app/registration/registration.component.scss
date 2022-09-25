@@ -1,0 +1,32 @@
+@use '../../styles.scss' as m;
+
+.title{
+    font-family: m.$title-font;
+}
+
+.normal{
+    margin: 0 m.$normal;
+}
+
+.btn-div{
+    margin: 0 m.$button;
+}
+
+hr{
+    width: 30%;
+}
+
+@media screen and (max-width : 760px) {
+
+    .form-floating{
+        margin: 0;
+    }
+
+    .btn-div{
+        margin: 0;
+    }
+
+    .normal { 
+        margin: 0;
+    }
+}

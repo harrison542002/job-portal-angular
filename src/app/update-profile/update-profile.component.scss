@@ -1,0 +1,67 @@
+@use '../../styles.scss' as m;
+
+.title{
+    font-family: m.$title-font;
+}
+
+.normal{
+    margin: 0 m.$normal;
+}
+
+.row{
+    margin : 0 m.$row;
+}
+
+.btn-div{
+    margin: 0 m.$button;
+}
+
+.form-select{
+    width: 25% !important;
+}
+
+textarea{
+    width: 40% !important;
+}
+
+.uploader{
+    
+    width: 40% !important;
+    margin: 0 30% !important;
+
+}
+
+@media screen and (max-width : 760px) {
+
+    .row{
+        margin: 0;
+    }
+
+    .row > * {
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .btn-div{
+        margin: 0;
+    }
+
+    .normal { 
+        margin: 0;
+    }
+
+    .form-select{
+        width: 100% !important;
+    }
+
+    textarea{
+    width: 100% !important;
+    }
+
+    .uploader{
+    
+        width: 100% !important;
+        margin: 0!important;
+    
+    }
+}

@@ -1,0 +1,229 @@
+<app-profile-nav></app-profile-nav>
+<!-- Profile -->
+<div class="container-fluid mt-5 profile pb-5" *ngIf="firstName">
+    <div class="row mt-5">
+        <div class="col-md-6 mt-5">
+            <div class="rounded border shadow-sm bg-light">
+                <div class="container mt-3 mb-3">
+                    <div class="container row d-lg-flex justify-content-around">
+                          <img class="img-fluid" [src]="imgURL" alt="image" *ngIf="imgURL">
+                          <div class="pt-4 ms-lg-3">
+                            <h4 class="text-center">
+                                {{firstName}} {{lastName}} ({{nickName}})
+                            </h4>
+                            <h5 class="text-center text-secondary">
+                                <i class="fa-solid fa-map-pin text-danger"></i> {{country}}, {{city}}
+                            </h5>
+                            <h5 class="text-center">
+                                {{occupation}} | {{industry}}
+                            </h5>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-2">
+                <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#editModal">
+                    Edit My profile
+                </button>
+            </div>
+        </div>
+        <div class="col-md-6 mt-5">
+            <div class="container rounded shadow-sm h-100 bg-light">
+                <div class="container p-2">
+                    <div class="container mt-3 mb-5">
+                        <h5>
+                            <i class="fa-solid fa-graduation-cap"></i> &nbsp;
+                            <b>Education Background</b>
+                        </h5>
+                        <p>
+                            {{school}} - {{qulification}}
+                        </p>
+                    </div>
+                    <div class="container mb-5">
+                        <h5>
+                            <i class="fa-solid fa-user-pen"></i> &nbsp;
+                            <b>Self Description</b>
+                        </h5>
+                        <p>
+                            {{selfSummary}}
+                        </p>
+                    </div>
+                    <div class="container mb-5">
+                        <h5>
+                            <i class="fa-solid fa-laptop-code"></i>&nbsp;
+                            <b>Skills</b>
+                        </h5>
+                        <div *ngFor="let skill of skills; let i = index">
+                            <p>
+                                {{i+1}}. {{skill}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Profile -->
+
+<!-- Edit-Modal -->
+<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header sticky-top bg-light">
+          <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form *ngIf="form" (ngSubmit)="onSubmit()" [formGroup]="form">
+                <div class="container">
+            
+                  <!-- Name -->
+                  <div class="row mb-3">
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingInput" placeholder="Your First Name" name="firstName"
+                          formControlName="firstName" />
+                        <label for="floatingInput">
+                          First Name
+                        </label>
+                      </div>
+                      <div *ngIf="firstName2.invalid && (firstName2.dirty || firstName2.touched)">
+                        <div *ngIf="firstName2.errors?.['required']" class="alert alert-danger">
+                          Name is required
+                        </div>
+                        <div *ngIf="firstName2.errors?.['minlength']" class="alert alert-danger">
+                          Name requires at least 4 character
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="floatingPassword" placeholder="Your Last Name" name="lastName"
+                          formControlName="lastName">
+                        <label for="floatingPassword">
+                          Last Name
+                        </label>
+                      </div>
+                      <div *ngIf="lastName2.invalid && (lastName2.dirty || lastName2.touched)">
+                        <div *ngIf="lastName2.errors?.['required']" class="alert alert-danger">
+                          Name is required
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Name -->
+            
+                  <!-- nickName -->
+                  <div class="form-floating normal mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="nickName" name="nickName"
+                      formControlName="nickName">
+                    <label for="floatingInput">Nick Name</label>
+                  </div>
+                  <div class="normal mb-3" *ngIf="nickName2.invalid && (nickName2.dirty || nickName2.touched)">
+                    <div *ngIf="nickName2.errors?.['required']" class="alert alert-danger">
+                      Please enter one nickname for your employer to call out
+                    </div>
+                  </div>
+                  <!-- nickName -->
+            
+                  <!-- Education -->
+                  <div class="form-floating mb-3 normal">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="School Name" name="school"
+                      formControlName="school" />
+                    <label for="floatingInput">
+                      Name of School
+                    </label>
+                  </div>
+                  <div *ngIf="school2.invalid && (school2.dirty || school2.touched)" class="normal">
+                    <div *ngIf="school2.errors?.['required']" class="alert alert-danger">
+                      Education Background is required
+                    </div>
+                  </div>
+                  <!-- Education -->
+            
+                  <!-- Qulification -->
+                  <label for="qulification" class="normal mb-3"><b>Choose Your Education qulification Type : </b></label>
+                  <select class="form-select normal mb-3" name="qulification" id="qulification" formControlName="qulification">
+                    <option *ngFor="let degree of qulificationLists" [value]="degree">{{degree}}</option>
+                  </select>
+                  <!-- Qulification -->
+            
+                  <!-- Skills -->
+                  <label for="qulification" class="normal"><b>Choose Your Skills: </b></label>
+                  <div class="form-check normal" *ngFor="let skill of skillsLists">
+                    <input class="form-check-input" type="checkbox" value="{{skill}}" id="{{skill}}" (change)="onChange(skill,$event.target)"
+                    [checked]="skills.includes(skill)">
+                    <label class="form-check-label" for="{{skill}}">
+                      {{skill}}
+                    </label>
+                  </div>
+                  <!-- Skills -->
+            
+                  <!-- Industry Type -->
+                  <label for="industry" class="normal mb-3 mt-3"><b>Choose Your Industry Type :</b></label>
+                  <select class="form-select normal mb-3" name="industry" id="industry" formControlName="industry">
+                    <option *ngFor="let industryType of industryLists" [value]="industryType">{{industryType}}</option>
+                  </select>
+            
+                  <div class="normal mb-3" *ngIf="industry2.invalid && (industry2.dirty || industry2.touched)">
+                    <div *ngIf="industry2.errors?.['required']" class="alert alert-danger">
+                      Please choose one industry type
+                    </div>
+                  </div>
+                  <!-- Industry Type -->
+            
+                  <!-- Occupation -->
+                  <label for="occupation" class="normal mb-3"><b>I am Currently A :</b></label>
+                  <select class="form-select normal mb-3" name="occupation" id="occupation" formControlName="occupation">
+                    <option *ngFor="let occupationType of occupationLists" [value]="occupationType">{{occupationType}}</option>
+                  </select>
+            
+                  <div class="normal mb-3" *ngIf="occupation2.invalid && (occupation2.dirty || occupation2.touched)">
+                    <div *ngIf="occupation2.errors?.['required']" class="alert alert-danger">
+                      Please choose type of occupation
+                    </div>
+                  </div>
+                  <!-- Occupation -->
+            
+                  <!-- Country -->
+                  <label for="country" class="normal mb-3"><b>Country : </b></label>
+                  <select class="form-select normal mb-3" name="country" id="country" formControlName="country">
+                    <option *ngFor="let eachCountry of countryLists" [value]="eachCountry">{{eachCountry}}</option>
+                  </select>
+            
+                  <div class="normal mb-3" *ngIf="country2.invalid && (country2.dirty || country2.touched)">
+                    <div *ngIf="country2.errors?.['required']" class="alert alert-danger">
+                      Please choose your country
+                    </div>
+                  </div>
+                  <!-- Country -->
+            
+                  <!-- City -->
+                  <div class="form-floating mb-3 normal">
+                    <input type="text" class="form-control" id="city" placeholder="City" name="city"
+                      formControlName="city" />
+                    <label for="floatingInput">
+                      City
+                    </label>
+                  </div>
+                  <div *ngIf="city2.invalid && (city2.dirty || city2.touched)" class="normal">
+                    <div *ngIf="city2.errors?.['required']" class="alert alert-danger">
+                      Please Enter Your City
+                    </div>
+                  </div>
+                  <!-- City -->
+            
+                  <!-- Summary -->
+                  <label for="selfSummary" class="normal mb-3"><b>Self Description</b></label>
+                  <textarea class="form-control normal mb-3" id="selfSummary" rows="4" formControlName="selfSummary"></textarea>
+                  <!-- Summary -->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-primary" [disabled]="form.invalid" data-bs-dismiss="modal">Save changes</button>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>

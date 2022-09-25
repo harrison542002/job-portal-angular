@@ -1,0 +1,56 @@
+<nav class="navbar fixed-top navbar-expand-lg bg-light shadow-sm">
+    <div class="container-fluid">
+        <a routerLink="/home" class="navbar-brand ms-4">
+            <img src="../../assets/img/logo.png" width="40" alt="logo">
+        </a>
+
+        <form class="d-flex" role="search">
+            <div class="search-box d-flex border rounded">
+                <button class="btn custom-btn" (click)="onSearch()">
+                    <i class="fa-solid fa-magnifying-glass fa-xl mt-2"></i>
+                </button>
+                <input class="form-control" [(ngModel)]="query" name="Search" type="search" placeholder="Search People.." aria-label="Search" >
+            </div>
+        </form>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-bars fa-lg"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-md-5">
+
+            <li class="nav-item">
+                <a class="nav-link"  href="#">
+                    <button class="btn text-primary">
+                        Find Jobs
+                    </button> 
+                </a>
+            </li>
+
+            <li class="nav-item" *ngIf="currentUser.length <= 0">
+                <a class="nav-link" routerLink="/register">
+                    <button class="btn btn-primary">
+                        Join Now
+                    </button>
+                </a>
+            </li>
+            <li class="nav-item" *ngIf="currentUser.length <= 0">
+                <a class="nav-link" routerLink="/login">
+                    <button class="btn btn-outline-primary">
+                        Log In
+                    </button>
+                </a>
+            </li>
+        </ul>
+
+        <div class="avatar" *ngIf="currentUser.length > 0">
+            <a [routerLink]="'/profile/' + currentUser">
+                <i class="fa-solid fa-user-tie fa-2xl"></i>
+            </a>
+        </div>
+        
+
+    </div>
+    </div>
+</nav>

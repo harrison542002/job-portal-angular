@@ -1,0 +1,23 @@
+<app-profile-nav></app-profile-nav>
+<div class="container searchList" *ngIf="searchedLists">
+    <h2 class="mb-3">"Search Results"</h2>
+    <div class="container people bg-light d-flex mb-3" *ngFor="let searchResult of searchedLists; let i = index">
+            <img *ngIf="img[i].length > 0" class="img-fluid img" [src] = "img[i]" alt="profileImage">
+            <img *ngIf="img[i].length <= 0" class="img-fluid img" [src] = "'../../assets/img/default_profile.png'" alt="profileImage">
+            <div class="container ms-5 p-3">
+                <h4>{{searchResult['firstName']}} {{searchResult['lastName']}}</h4>
+                <h5>({{searchResult['nickName']}}) {{searchResult['industry']}}</h5>
+                <p class="text-secondary">
+                    <i class="fa-solid fa-map-pin text-danger"></i>
+                    {{searchResult['country']}}
+                    {{searchResult['city']}}
+                </p>
+                <button class="btn btn-outline-primary" (click)="onClick(searchResult['id'])">
+                    View Profile
+                </button>
+            </div>
+    </div>
+    <div class="container no-found d-flex" *ngIf="searchedLists.length <= 0">
+        <h3>No Such A Person 😓</h3>
+    </div>
+</div>
